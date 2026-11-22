@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" fill="none">
+  <g>
+    <!-- Icon: stacked data bars -->
+    <rect x="2" y="18" width="6" height="16" rx="1.5" fill="#4F46E5"/>
+    <rect x="10" y="10" width="6" height="24" rx="1.5" fill="#6366F1"/>
+    <rect x="18" y="4" width="6" height="30" rx="1.5" fill="#4F46E5"/>
+    <!-- Lens circle overlay -->
+    <circle cx="18" cy="14" r="10" stroke="#6366F1" stroke-width="2" fill="none" opacity="0.5"/>
+    <line x1="25" y1="21" x2="31" y2="27" stroke="#6366F1" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+  </g>
+  <!-- Text: DataLens Studio -->
+  <text x="38" y="17" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#0F172A" letter-spacing="-0.3">DataLens</text>
+  <text x="38" y="31" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="500" fill="#64748B" letter-spacing="1.5">STUDIO</text>
+</svg>

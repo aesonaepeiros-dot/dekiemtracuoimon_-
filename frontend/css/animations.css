@@ -1,0 +1,274 @@
+/* ============================================================
+   DataLens Studio – Animations & Transitions
+   ============================================================ */
+
+/* ---- Page View Transitions ---- */
+@keyframes viewEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes viewExit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+.view.active {
+  animation: viewEnter 0.25s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* ---- Toast Notifications ---- */
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toastOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+    max-height: 100px;
+  }
+  to {
+    opacity: 0;
+    transform: translateX(24px);
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* ---- Skeleton / Loading ---- */
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--slate-200) 25%,
+    var(--slate-100) 50%,
+    var(--slate-200) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s infinite;
+}
+
+/* ---- Step Progress Line ---- */
+@keyframes progressFill {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+.step-connector-fill.animate {
+  animation: progressFill 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ---- Upload Zone Pulse ---- */
+@keyframes uploadPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(99,102,241,.3); }
+  70%  { box-shadow: 0 0 0 10px rgba(99,102,241,0); }
+  100% { box-shadow: 0 0 0 0 rgba(99,102,241,0); }
+}
+
+.upload-zone.drag-over {
+  animation: uploadPulse 1s ease infinite;
+}
+
+/* ---- Progress Bar ---- */
+@keyframes progressBarStripe {
+  from { background-position: 40px 0; }
+  to   { background-position: 0 0; }
+}
+
+.progress-bar-fill.animated {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255,255,255,.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255,255,255,.15) 50%,
+    rgba(255,255,255,.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 40px 40px;
+  animation: progressBarStripe 0.6s linear infinite;
+}
+
+/* ---- Spin Loader ---- */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--slate-200);
+  border-top-color: var(--indigo-600);
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 0.7s linear infinite;
+}
+
+.spinner-sm { width: 14px; height: 14px; border-width: 2px; }
+.spinner-lg { width: 32px; height: 32px; border-width: 3px; }
+
+/* ---- Card hover glow ---- */
+.card-glow {
+  transition: box-shadow var(--transition-normal);
+}
+
+.card-glow:hover {
+  box-shadow: 0 0 0 1px rgba(99,102,241,.2), var(--shadow-lg);
+}
+
+/* ---- Fade In Up (generic) ---- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* Staggered children */
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.10s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.20s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.30s; }
+
+/* ---- Button active press ---- */
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* ---- Insight card reveal ---- */
+@keyframes insightReveal {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.insight-reveal {
+  animation: insightReveal 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* ---- Table row sort animation ---- */
+.data-grid tbody tr.row-sorted {
+  animation: rowFadeIn 0.15s ease both;
+}
+
+@keyframes rowFadeIn {
+  from { opacity: 0; transform: translateY(3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Loading overlay ---- */
+.loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(248,250,252,.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  border-radius: inherit;
+  z-index: 10;
+  backdrop-filter: blur(2px);
+}
+
+.loading-overlay-text {
+  font-size: 13px;
+  color: var(--slate-500);
+  font-weight: 500;
+}
+
+/* ---- Chart skeleton ---- */
+.chart-skeleton {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 16px;
+}
+
+.chart-skeleton-bar {
+  flex: 1;
+  border-radius: 4px 4px 0 0;
+}
+
+/* ---- Ambient, restrained motion ---- */
+@keyframes softReveal {
+  from { opacity: 0; transform: translateY(12px) scale(.992); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-3px) rotate(-3deg); }
+}
+
+.view.active > * { animation: softReveal 420ms cubic-bezier(.2,.75,.25,1) both; }
+.view.active > *:nth-child(2) { animation-delay: 45ms; }
+.view.active > *:nth-child(3) { animation-delay: 85ms; }
+.view.active > *:nth-child(4) { animation-delay: 125ms; }
+.stat-card-icon { transition: transform 240ms ease, box-shadow 240ms ease; }
+.stat-card:hover .stat-card-icon { transform: scale(1.08) rotate(-4deg); box-shadow: 0 6px 14px rgba(79,70,229,.13); }
+.export-card-icon { transition: transform 260ms cubic-bezier(.2,.75,.25,1); }
+.export-card:hover .export-card-icon { transform: translateY(-3px) rotate(-4deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+[data-motion="off"] *, [data-motion="off"] *::before, [data-motion="off"] *::after {
+  animation-duration: .01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: .01ms !important;
+  scroll-behavior: auto !important;
+}

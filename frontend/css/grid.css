@@ -1,0 +1,353 @@
+/* ============================================================
+   DataLens Studio – Data Grid CSS
+   Professional data grid for enterprise use.
+   ============================================================ */
+
+.grid-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.grid-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.grid-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.grid-search {
+  position: relative;
+}
+
+.grid-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  color: var(--slate-400);
+  pointer-events: none;
+}
+
+.grid-search input {
+  padding: 6px 10px 6px 32px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 12.5px;
+  font-family: var(--font-sans);
+  color: var(--navy-700);
+  background: var(--color-surface);
+  outline: none;
+  width: 220px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.grid-search input:focus {
+  border-color: var(--indigo-500);
+  box-shadow: 0 0 0 3px rgba(99,102,241,.12);
+}
+
+.grid-filter-row th { padding: 5px 7px; background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
+.grid-column-filter {
+  width: 100%; min-width: 64px; padding: 5px 7px;
+  border: 1px solid var(--color-border); border-radius: 7px;
+  background: var(--color-surface); color: var(--navy-700); font: inherit; font-size: 11px;
+}
+.grid-column-filter:focus { outline: 2px solid rgba(113,103,242,.35); border-color: var(--indigo-500); }
+.grid-page-size-label { display: inline-flex; align-items: center; gap: 6px; color: var(--slate-500); font-size: 11px; white-space: nowrap; }
+.grid-page-size { border: 1px solid var(--color-border); border-radius: 7px; padding: 4px 6px; background: var(--color-surface); color: var(--navy-700); }
+
+.grid-filter-tabs, .grid-filters {
+  display: flex;
+  gap: 4px;
+  background: var(--slate-100);
+  border-radius: var(--radius-md);
+  padding: 3px;
+}
+
+.grid-filter-tab, .grid-filter-btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--slate-500);
+  font-family: var(--font-sans);
+  transition: all var(--transition-fast);
+}
+
+.grid-filter-tab.active, .grid-filter-btn.active {
+  background: var(--color-surface);
+  color: var(--navy-800);
+  box-shadow: var(--shadow-sm);
+  font-weight: 600;
+}
+
+.grid-info {
+  font-size: 12px;
+  color: var(--slate-500);
+  white-space: nowrap;
+}
+
+/* -- Grid Container -- */
+.data-grid-wrap {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.data-grid-scroll {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 520px;
+}
+
+.data-grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  min-width: 600px;
+}
+
+/* -- Header Row -- */
+.data-grid thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.data-grid th {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--slate-500);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--slate-100);
+  border-bottom: 2px solid var(--color-border);
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.data-grid th:hover { background: var(--slate-200); }
+
+.th-inner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sort-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  opacity: 0.4;
+  transition: opacity var(--transition-fast);
+}
+
+.sort-icon svg { width: 8px; height: 8px; }
+
+th.sort-asc  .sort-icon,
+th.sort-desc .sort-icon { opacity: 1; color: var(--indigo-600); }
+
+th.sort-asc  .sort-icon .sort-up   { color: var(--indigo-600); opacity: 1; }
+th.sort-asc  .sort-icon .sort-down { opacity: 0.25; }
+th.sort-desc .sort-icon .sort-up   { opacity: 0.25; }
+th.sort-desc .sort-icon .sort-down { color: var(--indigo-600); opacity: 1; }
+
+/* -- Body Rows -- */
+.data-grid tbody tr {
+  transition: background var(--transition-fast);
+}
+
+.data-grid tbody tr:hover td { background-color: rgba(241,245,249,.7); }
+
+.data-grid td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--navy-700);
+  vertical-align: middle;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-grid tbody tr:last-child td { border-bottom: none; }
+
+/* -- Row index -- */
+.data-grid td.row-idx {
+  color: var(--slate-400);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  width: 48px;
+  min-width: 48px;
+  max-width: 48px;
+  text-align: right;
+  user-select: none;
+}
+
+/* -- Cell highlighting -- */
+.data-grid td.cell-modified {
+  background-color: var(--emerald-50) !important;
+  color: var(--emerald-600);
+  font-weight: 500;
+}
+
+.data-grid td.cell-outlier {
+  background-color: var(--amber-50) !important;
+  color: #92400E;
+  position: relative;
+}
+
+.data-grid td.cell-empty {
+  background-color: var(--red-50) !important;
+}
+
+.cell-iqr-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 4px;
+  padding: 1px 5px;
+  background: var(--amber-100);
+  color: #92400E;
+  font-size: 9px;
+  font-weight: 700;
+  border-radius: 3px;
+  vertical-align: middle;
+  letter-spacing: 0.3px;
+}
+
+.cell-empty-placeholder {
+  font-style: italic;
+  color: var(--slate-300);
+  font-size: 11px;
+}
+
+/* -- Number cells -- */
+.data-grid td.cell-number {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* -- Grid Footer -- */
+.data-grid-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  font-size: 12px;
+}
+
+.grid-footer-info { color: var(--slate-500); }
+
+.grid-pagination {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.grid-page-btn {
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--navy-700);
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  font-family: var(--font-sans);
+}
+
+.grid-page-btn:hover:not(:disabled) {
+  background: var(--slate-100);
+  border-color: var(--slate-300);
+}
+
+.grid-page-btn.active {
+  background: var(--indigo-600);
+  border-color: var(--indigo-600);
+  color: #fff;
+}
+
+.grid-page-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* Loading state */
+.data-grid-loading {
+  padding: var(--space-10);
+  text-align: center;
+}
+
+.data-grid td.skeleton-cell {
+  padding: 8px 14px;
+}
+
+.skeleton-line {
+  height: 14px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Row animation */
+@keyframes rowFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.data-grid tbody tr {
+  animation: rowFadeIn 0.15s ease both;
+}
+
+/* Current DataGrid markup */
+.grid-container { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+.grid-table-wrapper { max-height: 520px; overflow: auto; }
+.grid-table { width: 100%; min-width: 700px; border-collapse: separate; border-spacing: 0; font-size: 12.5px; }
+.grid-table thead { position: sticky; top: 0; z-index: 10; }
+.grid-table th { padding: 10px 12px; text-align: left; background: var(--slate-100); color: var(--slate-600); border-bottom: 1px solid var(--color-border); white-space: nowrap; }
+.grid-table .grid-filter-row th { top: 39px; padding: 5px 7px; }
+.grid-th { cursor: pointer; user-select: none; }
+.grid-th:hover { background: var(--slate-200); }
+.grid-th-content, .cell-content { display: flex; align-items: center; gap: 7px; }
+.grid-th-content { justify-content: space-between; }
+.grid-table td { max-width: 260px; padding: 8px 12px; border-bottom: 1px solid var(--color-border); color: var(--navy-700); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.grid-table tbody tr:hover td { background: rgba(99,102,241,.035); }
+.grid-table .grid-td-index { position: sticky; left: 0; z-index: 2; width: 48px; min-width: 48px; background: var(--color-surface); color: var(--slate-400); text-align: right; font-variant-numeric: tabular-nums; }
+.grid-table td.cell-modified { background: var(--emerald-50); color: var(--emerald-700); }
+.grid-table td.cell-outlier { background: var(--amber-50); color: #92400E; }
+.grid-table td.cell-empty { background: var(--red-50); }
+.cell-edit-trigger { display: inline-block; max-width: 100%; padding: 2px 4px; border: 1px solid transparent; border-radius: 5px; background: transparent; color: inherit; font: inherit; text-align: left; cursor: text; overflow: hidden; text-overflow: ellipsis; vertical-align: middle; }
+.cell-edit-trigger:hover, .cell-edit-trigger:focus-visible { border-color: rgba(99,102,241,.3); background: var(--color-surface); outline: none; }
+.cell-edit-input { width: min(220px, 100%); min-width: 90px; padding: 5px 7px; border: 1px solid var(--indigo-500); border-radius: 6px; background: var(--color-surface); color: var(--navy-800); font: inherit; outline: 3px solid rgba(99,102,241,.12); }
+.grid-empty { padding: 28px 16px !important; color: var(--slate-500) !important; text-align: center; }
+.grid-pagination { padding: 10px 14px; background: var(--color-surface); }
+@media (max-width: 768px) {
+  .grid-toolbar-left, .grid-toolbar-right { flex-wrap: wrap; }
+  .grid-search input { width: min(220px, 70vw); }
+  .grid-filters { max-width: 100%; overflow-x: auto; }
+}

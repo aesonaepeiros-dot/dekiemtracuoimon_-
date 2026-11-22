@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DataLens Studio – Nền tảng Làm sạch &amp; Phân tích Dữ liệu Doanh nghiệp</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Application CSS -->
+  <link rel="stylesheet" href="./css/main.css" />
+  <link rel="stylesheet" href="./css/grid.css" />
+  <link rel="stylesheet" href="./css/animations.css" />
+</head>
+<body>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ── Sidebar Navigation ─────────────────────────────────────────── -->
+  <aside class="sidebar">
+    <!-- Logo / Brand -->
+    <div class="sidebar-logo">
+      <a href="#" id="nav-brand" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" flex-shrink="0">
+          <rect x="3" y="3" width="8" height="8" rx="2" fill="#4F46E5"/>
+          <rect x="13" y="3" width="8" height="8" rx="2" fill="#6366F1" opacity="0.6"/>
+          <rect x="3" y="13" width="8" height="8" rx="2" fill="#6366F1" opacity="0.6"/>
+          <rect x="13" y="13" width="8" height="8" rx="2" fill="#10B981"/>
+        </svg>
+        <div class="sidebar-logo-text">
+          <span class="product-name">DataLens</span>
+          <span class="product-sub">Studio</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">TỔNG QUAN</div>
+      <a href="#" class="nav-item active" data-view-target="home">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+        </svg>
+        <span>Trang chủ</span>
+      </a>
+
+      <div class="nav-section-label">QUY TRÌNH XỬ LÝ</div>
+      <a href="#" class="nav-item" data-view-target="upload">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+        </svg>
+        <span>1. Nạp dữ liệu</span>
+      </a>
+      <a href="#" class="nav-item" data-view-target="clean">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 01.894 1.79l-1.233.616 1.738 5.42a1 1 0 01-.285 1.05A3.989 3.989 0 0115 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.715-5.349L11 6.477V16h2a1 1 0 110 2H7a1 1 0 110-2h2V6.477L6.237 7.582l1.715 5.349a1 1 0 01-.285 1.05A3.989 3.989 0 015 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.738-5.42-1.233-.617a1 1 0 01.894-1.788l1.599.799L9 4.323V3a1 1 0 011-1z" clip-rule="evenodd"/>
+        </svg>
+        <span>2. Làm sạch &amp; Kiểm toán</span>
+      </a>
+      <a href="#" class="nav-item" data-view-target="analyze">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+        </svg>
+        <span>3. Phân tích &amp; AI</span>
+      </a>
+      <a href="#" class="nav-item" data-view-target="export">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 001.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 000-1.414z" clip-rule="evenodd"/>
+        </svg>
+        <span>4. Xuất kết quả</span>
+      </a>
+
+      <div class="nav-divider"></div>
+      <div class="nav-section-label">HỆ THỐNG</div>
+      <a href="#" class="nav-item" data-view-target="history">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+        </svg>
+        <span>Lịch sử tệp</span>
+      </a>
+      <a href="/h2-console" target="_blank" rel="noopener noreferrer" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M3 12v3c0 1.657 3.134 3 7 3s7-1.343 7-3v-3c0 1.657-3.134 3-7 3s-7-1.343-7-3z"/>
+          <path d="M3 7v3c0 1.657 3.134 3 7 3s7-1.343 7-3V7c0 1.657-3.134 3-7 3S3 8.657 3 7z"/>
+          <path d="M17 5c0 1.657-3.134 3-7 3S3 6.657 3 5s3.134-3 7-3 7 1.343 7 3z"/>
+        </svg>
+        <span>H2 Database ↗</span>
+      </a>
+    </nav>
+
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <button id="btn-toggle-theme" class="theme-toggle-btn">
+        <span id="theme-btn-icon">🌙</span>
+        <span id="theme-btn-text">Giao diện Tối</span>
+      </button>
+      <button id="btn-toggle-motion" class="theme-toggle-btn" aria-pressed="false" style="margin-top:6px;">
+        <span aria-hidden="true">✨</span><span id="motion-btn-text">Tắt chuyển động</span>
+      </button>
+      <div class="system-status-indicator" style="margin-top:10px;display:flex;align-items:center;gap:6px;font-size:11px;color:var(--slate-400);">
+        <span style="width:7px;height:7px;border-radius:50%;background:#10B981;display:inline-block;"></span>
+        <span>Java 17 • H2 Embedded</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main Content Area ──────────────────────────────────────────── -->
+  <main class="main-content">
+
+    <!-- Top Header Bar -->
+    <header class="top-header">
+      <div class="header-breadcrumb" style="display:flex;align-items:center;gap:8px;">
+        <span style="font-size:14px;font-weight:600;color:var(--navy-800);">DataLens Studio</span>
+        <span style="color:var(--slate-400);">/</span>
+        <span class="current-dataset-name text-muted" style="font-size:13px;">Chưa nạp tệp</span>
+      </div>
+      <div class="top-header-actions">
+        <button id="btn-open-gemini-modal" class="btn btn-secondary btn-sm" title="Cấu hình Google Gemini API Key">
+          <span style="font-size:13px;">🔑</span>
+          <span id="gemini-key-status-text">Gemini API Key</span>
+          <span id="gemini-key-status-dot" style="width:7px;height:7px;border-radius:50%;background:#94A3B8;display:inline-block;"></span>
+        </button>
+        <span class="badge badge-indigo current-dataset-meta">0 bản ghi</span>
+        <a href="/h2-console" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="Mở H2 Database Console">
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M3 12v3c0 1.657 3.134 3 7 3s7-1.343 7-3v-3c0 1.657-3.134 3-7 3s-7-1.343-7-3z"/>
+            <path d="M17 5c0 1.657-3.134 3-7 3S3 6.657 3 5s3.134-3 7-3 7 1.343 7 3z"/>
+          </svg>
+          <span>H2 Console</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Page Content Wrapper -->
+    <div class="page-content">
+
+      <!-- Workflow Progress Stepper -->
+      <div class="step-progress" id="workflow-stepper" style="display:none;">
+        <div class="step-item active" id="stepper-step-1" data-view-target="upload">
+          <div class="step-circle">1</div>
+          <div class="step-connector"><div class="step-connector-fill"></div></div>
+          <div class="step-label">Nạp dữ liệu</div>
+        </div>
+        <div class="step-item" id="stepper-step-2" data-view-target="clean">
+          <div class="step-circle">2</div>
+          <div class="step-connector"><div class="step-connector-fill"></div></div>
+          <div class="step-label">Làm sạch</div>
+        </div>
+        <div class="step-item" id="stepper-step-3" data-view-target="analyze">
+          <div class="step-circle">3</div>
+          <div class="step-connector"><div class="step-connector-fill"></div></div>
+          <div class="step-label">Phân tích &amp; AI</div>
+        </div>
+        <div class="step-item" id="stepper-step-4" data-view-target="export">
+          <div class="step-circle">4</div>
+          <div class="step-label">Xuất kết quả</div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           VIEW: HOME
+           ============================================================ -->
+      <div id="view-home" class="view active">
+
+        <!-- Home Hero -->
+        <div class="home-hero">
+          <div class="home-hero-eyebrow">Hệ thống Doanh nghiệp • Java Spring Boot &amp; H2 DB</div>
+          <h1 class="home-hero-title">Nền tảng Làm sạch, Kiểm toán <br/><span>&amp; Phân tích Dữ liệu Thực tế</span></h1>
+          <p class="home-hero-desc">
+            Giải pháp chuẩn hóa dữ liệu tự động với 6 quy tắc minh bạch, phát hiện ngoại lai IQR,
+            tích hợp Google Gemini Flash sinh nhận định kinh doanh và xuất báo cáo đa định dạng.
+          </p>
+          <div class="home-hero-actions">
+            <button id="home-btn-upload" class="hero-btn-primary">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Nạp tệp dữ liệu ngay
+            </button>
+            <button id="home-btn-history" class="hero-btn-ghost">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+              </svg>
+              Lịch sử cơ sở dữ liệu
+            </button>
+          </div>
+        </div>
+
+        <!-- Workflow steps overview -->
+        <div class="workflow-steps" style="margin-bottom:32px;">
+          <div class="workflow-step active" data-view-target="upload">
+            <div class="workflow-step-num">1</div>
+            <div>
+              <div class="workflow-step-label">Nạp tệp dữ liệu</div>
+              <div class="workflow-step-desc">Excel, CSV, JSON, Word, PDF – bất kỳ định dạng nào</div>
+            </div>
+          </div>
+          <div class="workflow-step" data-view-target="clean">
+            <div class="workflow-step-num">2</div>
+            <div>
+              <div class="workflow-step-label">Làm sạch &amp; Kiểm toán</div>
+              <div class="workflow-step-desc">6 quy tắc tự động, ghi vết Trước→Sau vào H2</div>
+            </div>
+          </div>
+          <div class="workflow-step" data-view-target="analyze">
+            <div class="workflow-step-num">3</div>
+            <div>
+              <div class="workflow-step-label">Phân tích &amp; Gemini AI</div>
+              <div class="workflow-step-desc">KPI, 5 biểu đồ, nhận định từ Google Gemini Flash</div>
+            </div>
+          </div>
+          <div class="workflow-step" data-view-target="export">
+            <div class="workflow-step-num">4</div>
+            <div>
+              <div class="workflow-step-label">Xuất kết quả</div>
+              <div class="workflow-step-desc">Excel, CSV, JSON, Báo cáo HTML offline</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stat Cards Row -->
+        <div class="kpi-grid" style="margin-bottom:24px;">
+          <div class="stat-card">
+            <div class="stat-card-top">
+              <div class="stat-card-icon indigo">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="stat-card-label">TỆP TRONG CƠ SỞ DỮ LIỆU</div>
+            <div class="stat-card-value" id="home-stat-datasets">0</div>
+            <div class="stat-card-change" style="color:var(--slate-500);font-size:12px;">Lưu trữ an toàn trong H2 Database</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-top">
+              <div class="stat-card-icon emerald">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="stat-card-label">BẢN GHI ĐÃ XỬ LÝ</div>
+            <div class="stat-card-value" id="home-stat-rows">0</div>
+            <div class="stat-card-change" style="color:var(--slate-500);font-size:12px;">Đã qua quy trình kiểm toán minh bạch</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-top">
+              <div class="stat-card-icon amber">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+            </div>
+            <div class="stat-card-label">TRẠNG THÁI HỆ THỐNG</div>
+            <div class="stat-card-value" style="color:var(--emerald-600);">Sẵn sàng</div>
+            <div class="stat-card-change" style="color:var(--slate-500);font-size:12px;">Spring Boot 3 + H2 RDBMS + Gemini API</div>
+          </div>
+        </div>
+
+        <!-- Recent Datasets Card -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title" style="font-size:15px;font-weight:600;color:var(--navy-800);margin-bottom:2px;">Tệp dữ liệu gần đây</h3>
+              <p style="font-size:13px;color:var(--slate-500);">Các tập dữ liệu đã nạp vào hệ thống</p>
+            </div>
+            <a href="#" class="btn btn-secondary btn-sm" data-view-target="history">Xem tất cả →</a>
+          </div>
+          <div id="home-recent-datasets" style="padding:0 4px 4px;">
+            <div class="text-muted text-sm" style="padding:20px 16px;">Đang tải danh sách...</div>
+          </div>
+        </div>
+      </div><!-- /view-home -->
+
+      <!-- ============================================================
+           VIEW: UPLOAD (Bước 1)
+           ============================================================ -->
+      <div id="view-upload" class="view">
+
+        <div style="margin-bottom:24px;">
+          <h2 class="page-title">Bước 1 – Nạp tệp dữ liệu thực tế</h2>
+          <p class="page-subtitle">Tải lên bảng tính Excel, CSV, JSON, Word hoặc PDF. Dữ liệu gốc được lưu trữ nguyên vẹn trong H2 Database.</p>
+          <p class="workflow-hint"><strong>Bắt đầu:</strong> Chọn tệp → xem trước dữ liệu → chọn quy tắc làm sạch → phân tích và xuất báo cáo. Hãy kiểm tra tên cột trước khi tiếp tục.</p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;">
+          <!-- Upload Zone Card -->
+          <div class="card">
+            <div id="upload-dropzone" class="upload-zone">
+              <input id="file-input" type="file" accept=".xlsx,.xls,.csv,.tsv,.txt,.json,.docx,.pdf" style="display:none;" />
+              <div class="upload-zone-icon">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                </svg>
+              </div>
+              <div class="upload-zone-title">Nhấp để chọn tệp hoặc kéo thả vào đây</div>
+              <div class="upload-zone-subtitle">Hỗ trợ định dạng: <strong>.xlsx, .xls, .csv, .json, .docx, .pdf</strong></div>
+              <div class="upload-zone-formats">
+                <span class="badge badge-indigo">.xlsx / .xls</span>
+                <span class="badge badge-slate">.csv / .tsv</span>
+                <span class="badge badge-slate">.json</span>
+                <span class="badge badge-slate">.docx</span>
+                <span class="badge badge-slate">.pdf</span>
+                <span class="badge badge-slate">Tối đa <span class="upload-max-size">50 MB</span></span>
+              </div>
+            </div>
+
+            <div style="padding:0 20px 18px;text-align:center;">
+              <button id="btn-load-sample" type="button" class="btn btn-secondary btn-sm">Dùng dữ liệu mẫu để thử quy trình</button>
+            </div>
+
+            <!-- Selected file info (hidden until file chosen) -->
+            <div id="upload-file-info" class="card-body" style="display:none;border-top:1px solid var(--color-border);">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+                <div style="width:40px;height:40px;border-radius:8px;background:var(--indigo-100);display:flex;align-items:center;justify-content:center;font-size:20px;">📄</div>
+                <div>
+                  <div class="file-info-name" style="font-size:14px;font-weight:600;color:var(--navy-800);">ten_file.xlsx</div>
+                  <div style="font-size:12px;color:var(--slate-500);">
+                    <span class="file-info-size">0 KB</span> • Định dạng <span class="file-info-type badge badge-indigo" style="font-size:10px;">EXCEL</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Chọn Sheet (Excel – để trống = Sheet đầu tiên):</label>
+                <input id="upload-sheet-select" type="text" placeholder="Ví dụ: Sheet1 hoặc để trống" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="upload-business-context">Bối cảnh doanh nghiệp <span class="text-muted">(không bắt buộc)</span></label>
+                <input id="upload-business-context" type="text" maxlength="500" placeholder="Ví dụ: Bán lẻ đa kênh tại 3 miền" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="upload-data-goal">Bài toán cần giải quyết <span class="text-muted">(không bắt buộc)</span></label>
+                <textarea id="upload-data-goal" maxlength="1000" rows="2" placeholder="Ví dụ: Chuẩn hóa doanh thu và tìm nhóm hàng tăng trưởng tốt" class="form-control"></textarea>
+              </div>
+              <div style="margin-top:16px;">
+                <button id="btn-submit-upload" class="btn btn-primary btn-md" style="width:100%;">
+                  <span>Tiếp tục tải lên &amp; phân tích →</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Capabilities Card -->
+          <div class="card card-body">
+            <h3 style="font-size:14px;font-weight:600;color:var(--navy-800);margin-bottom:4px;">Khả năng xử lý đa định dạng</h3>
+            <p style="font-size:12.5px;color:var(--slate-500);margin-bottom:16px;">Hệ thống sẵn sàng tiếp nhận bất kỳ tài liệu nào từ máy tính của bạn:</p>
+
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div style="display:flex;align-items:flex-start;gap:12px;padding:12px;background:var(--slate-100);border-radius:8px;">
+                <span style="font-size:22px;">📊</span>
+                <div>
+                  <strong style="font-size:13px;color:var(--navy-800);">Bảng tính Excel (.xlsx, .xls)</strong>
+                  <div style="font-size:12px;color:var(--slate-500);margin-top:2px;">Đọc đa Sheet, tự động phát hiện header, định dạng ngày tháng và công thức số</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:12px;padding:12px;background:var(--slate-100);border-radius:8px;">
+                <span style="font-size:22px;">📄</span>
+                <div>
+                  <strong style="font-size:13px;color:var(--navy-800);">Văn bản phân cách (.csv, .tsv, .txt)</strong>
+                  <div style="font-size:12px;color:var(--slate-500);margin-top:2px;">Tự động nhận diện dấu phân cách (, ; \t |), tương thích UTF-8 &amp; Windows</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:12px;padding:12px;background:var(--slate-100);border-radius:8px;">
+                <span style="font-size:22px;">⚙️</span>
+                <div>
+                  <strong style="font-size:13px;color:var(--navy-800);">Dữ liệu cấu trúc JSON (.json)</strong>
+                  <div style="font-size:12px;color:var(--slate-500);margin-top:2px;">Bóc tách mảng đối tượng phẳng hoặc lồng cấp tự động</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:12px;padding:12px;background:var(--slate-100);border-radius:8px;">
+                <span style="font-size:22px;">📑</span>
+                <div>
+                  <strong style="font-size:13px;color:var(--navy-800);">Tài liệu Word (.docx) &amp; PDF (.pdf)</strong>
+                  <div style="font-size:12px;color:var(--slate-500);margin-top:2px;">Trích xuất bảng biểu dữ liệu nhúng trong văn bản thực tế</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /view-upload -->
+
+      <!-- ============================================================
+           VIEW: CLEAN (Bước 2)
+           ============================================================ -->
+      <div id="view-clean" class="view">
+
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:16px;flex-wrap:wrap;">
+          <div>
+            <h2 class="page-title">Bước 2 – Làm sạch dữ liệu &amp; Kiểm toán</h2>
+            <p class="page-subtitle">Tùy biến 6 quy tắc làm sạch. Mọi thay đổi được ghi vết Trước → Sau trong bảng AUDIT_LOGS của H2.</p>
+          </div>
+          <div style="display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap;">
+            <button id="btn-undo-clean" class="btn btn-secondary btn-md" style="display:none;">Hoàn tác phiên làm sạch</button>
+            <button id="btn-run-clean" class="btn btn-primary btn-md">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+              </svg>
+              Áp dụng quy tắc làm sạch
+            </button>
+            <button id="btn-approve-clean" class="btn btn-emerald btn-md" disabled>
+              Duyệt &amp; Tiến hành Phân tích →
+            </button>
+            <button id="btn-skip-clean" class="btn btn-secondary btn-md" title="Phân tích trực tiếp dữ liệu gốc không cần lọc">
+              Bỏ qua, Phân tích ngay ⏩
+            </button>
+          </div>
+        </div>
+
+        <div class="workflow-hint" style="margin-bottom:20px;"><strong>Quy trình:</strong> Bật/tắt quy tắc rồi chạy làm sạch để xem trước. Chạy lại sẽ tính từ dữ liệu gốc; bạn cũng có thể hoàn tác phiên hiện tại.</div>
+
+        <!-- 4 Cleaning Stat Cards -->
+        <div class="kpi-grid" style="margin-bottom:24px;">
+          <div class="stat-card">
+            <div class="stat-card-top">
+              <div class="stat-card-icon emerald">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+            <div class="stat-card-label">DÒNG HỢP LỆ SAU LÀM SẠCH</div>
+            <div class="stat-card-value" id="stat-cleaned-rows" style="color:var(--emerald-600);">Chưa chạy</div>
+            <div class="stat-card-change" style="color:var(--slate-500);font-size:12px;">Dữ liệu sẵn sàng đưa vào phân tích</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-top">
+              <div class="stat-card-icon red">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+            <div class="stat-card-label">DÒNG ĐÃ LOẠI BỎ</div>
+            <div class="stat-card-value" id="stat-removed-rows" style="color:var(--red-500);">Chưa chạy</div>
+            <div class="stat-card-change" style="color:var(--slate-500);font-size:12px;">Dòng trống / Trùng lặp 100%</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-top">
+              <div class="stat-card-icon indigo">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg>
+              </div>
+            </div>
+            <div class="stat-card-label">Ô ĐÃ CHUẨN HÓA</div>
+            <div class="stat-card-value" id="stat-modified-cells" style="color:var(--indigo-600);">Chưa chạy</div>
+            <div class="stat-card-change" style="color:var(--slate-500);font-size:12px;">Cắt khoảng trắng, chuẩn hóa ngày/số</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-top">
+              <div class="stat-card-icon amber">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+            <div class="stat-card-label">NGOẠI LAI IQR (CẢNH BÁO)</div>
+            <div class="stat-card-value" id="stat-outliers-count" style="color:var(--amber-500);">Chưa chạy</div>
+            <div class="stat-card-change" style="color:var(--slate-500);font-size:12px;">Đánh dấu màu vàng, KHÔNG xóa</div>
+          </div>
+        </div>
+
+        <div id="clean-impact-summary" class="workflow-hint" style="margin:-8px 0 24px;display:none;" aria-live="polite"></div>
+
+        <!-- 6 Cleaning Rule Toggles -->
+        <div class="card" style="margin-bottom:24px;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title" style="font-size:14px;font-weight:600;color:var(--navy-800);">Cấu hình 6 quy tắc làm sạch tự động</h3>
+              <p style="font-size:12.5px;color:var(--slate-500);margin-top:2px;">Bật hoặc tắt từng quy tắc theo yêu cầu bài toán nghiệp vụ</p>
+            </div>
+          </div>
+          <div class="card-body" style="display:flex;flex-direction:column;">
+            <label class="toggle-row">
+              <div class="toggle-info">
+                <div class="toggle-label">1. Cắt khoảng trắng thừa</div>
+                <div class="toggle-desc">Xóa khoảng trắng ở đầu/cuối chuỗi và gộp khoảng trắng liên tiếp</div>
+              </div>
+              <div class="toggle-switch">
+                <input type="checkbox" data-rule-key="trimWhitespace" checked />
+                <span class="toggle-track"></span>
+              </div>
+            </label>
+            <label class="toggle-row">
+              <div class="toggle-info">
+                <div class="toggle-label">2. Khử bản ghi trùng lặp</div>
+                <div class="toggle-desc">Loại bỏ các dòng trùng 100% giá trị trên tất cả các cột</div>
+              </div>
+              <div class="toggle-switch">
+                <input type="checkbox" data-rule-key="removeDuplicates" checked />
+                <span class="toggle-track"></span>
+              </div>
+            </label>
+            <label class="toggle-row">
+              <div class="toggle-info">
+                <div class="toggle-label">3. Chuẩn hóa định dạng văn bản</div>
+                <div class="toggle-desc">Viết hoa chữ cái đầu, chuẩn hóa danh mục và tên riêng</div>
+              </div>
+              <div class="toggle-switch">
+                <input type="checkbox" data-rule-key="standardizeText" checked />
+                <span class="toggle-track"></span>
+              </div>
+            </label>
+            <label class="toggle-row">
+              <div class="toggle-info">
+                <div class="toggle-label">4. Cảnh báo ngoại lai IQR [Q1 − 1.5×IQR, Q3 + 1.5×IQR]</div>
+                <div class="toggle-desc">Chỉ đánh dấu cảnh báo để kiểm toán, không tự ý xóa dữ liệu</div>
+              </div>
+              <div class="toggle-switch">
+                <input type="checkbox" data-rule-key="detectOutliers" checked />
+                <span class="toggle-track"></span>
+              </div>
+            </label>
+            <label class="toggle-row">
+              <div class="toggle-info">
+                <div class="toggle-label">5. Điền khuyết bằng Giá trị Trung bình (Mean)</div>
+                <div class="toggle-desc">Áp dụng cho các cột số có ô trống</div>
+              </div>
+              <div class="toggle-switch">
+                <input type="checkbox" data-rule-key="fillMissingWithMean" />
+                <span class="toggle-track"></span>
+              </div>
+            </label>
+            <label class="toggle-row">
+              <div class="toggle-info">
+                <div class="toggle-label">6. Loại bỏ dòng có ô trống dữ liệu</div>
+                <div class="toggle-desc">Xóa các dòng thiếu bất kỳ giá trị nào (mặc định tắt)</div>
+              </div>
+              <div class="toggle-switch">
+                <input type="checkbox" data-rule-key="removeMissingRows" />
+                <span class="toggle-track"></span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Preview Data Grid -->
+        <div class="card" style="margin-bottom:24px;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title" style="font-size:14px;font-weight:600;color:var(--navy-800);">Bảng xem trước dữ liệu (Data Grid)</h3>
+              <p style="font-size:12.5px;color:var(--slate-500);margin-top:2px;">Hiển thị ô đã sửa (xanh), ngoại lai IQR (vàng cam), ô trống (đỏ)</p>
+            </div>
+          </div>
+          <div id="clean-preview-grid"></div>
+        </div>
+
+        <!-- Audit Log -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title" style="font-size:14px;font-weight:600;color:var(--navy-800);">Nhật ký kiểm toán (Audit Logs)</h3>
+              <p style="font-size:12.5px;color:var(--slate-500);margin-top:2px;">Đối chiếu Trước → Sau được lưu vào bảng AUDIT_LOGS của H2</p>
+            </div>
+            <select id="audit-rule-filter" class="form-control" style="width:auto;min-width:190px;" aria-label="Lọc nhật ký theo quy tắc"><option value="">Tất cả quy tắc</option></select>
+          </div>
+          <div id="audit-log-container" class="log-list" style="padding:0 24px 16px;">
+            <div class="text-muted text-sm" style="padding:16px 0;">Chưa thực thi quy tắc làm sạch.</div>
+          </div>
+        </div>
+      </div><!-- /view-clean -->
+
+      <!-- ============================================================
+           VIEW: ANALYZE (Bước 3)
+           ============================================================ -->
+      <div id="view-analyze" class="view">
+
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:16px;flex-wrap:wrap;">
+          <div>
+            <h2 class="page-title">Bước 3 – Dashboard KPI &amp; Phân tích chuyên sâu</h2>
+            <p class="page-subtitle">Chỉ số thống kê chuẩn, 5 biểu đồ trực quan hóa và AI Insights từ Google Gemini Flash.</p>
+            <p class="workflow-hint"><strong>Tiếp theo:</strong> Chọn chỉ số và nhóm dữ liệu, đặt bộ lọc nếu cần, rồi chọn kiểu biểu đồ để so sánh kết quả.</p>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button id="btn-back-clean" class="btn btn-secondary btn-md">← Quay lại chỉnh quy tắc</button>
+            <button id="btn-proceed-export" class="btn btn-primary btn-md" style="flex-shrink:0;">Chuyển sang Bước 4: Xuất báo cáo →</button>
+          </div>
+        </div>
+
+        <div id="analysis-chart-notice" class="workflow-hint" style="display:none;margin:-12px 0 18px;" aria-live="polite"></div>
+
+        <!-- Metric Selection Toolbar -->
+        <div class="card" style="margin-bottom:24px;">
+          <div class="card-body" style="display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;">
+            <div class="form-group" style="flex:1;min-width:180px;margin-bottom:0;">
+              <label class="form-label">Chỉ số phân tích (Cột số):</label>
+              <select id="analysis-metric-select" class="form-control"></select>
+            </div>
+            <div class="form-group" style="flex:1;min-width:180px;margin-bottom:0;">
+              <label class="form-label">Phân nhóm theo (Cột phân loại):</label>
+              <select id="analysis-category-select" class="form-control"></select>
+            </div>
+            <div class="form-group" style="flex:1;min-width:180px;margin-bottom:0;">
+              <label class="form-label">Lọc ngày theo cột</label>
+              <select id="analysis-date-select" class="form-control"><option value="">Không lọc ngày</option></select>
+            </div>
+            <div class="form-group" style="min-width:140px;margin-bottom:0;">
+              <label class="form-label" for="analysis-from-date">Từ ngày</label>
+              <input id="analysis-from-date" type="date" class="form-control" />
+            </div>
+            <div class="form-group" style="min-width:140px;margin-bottom:0;">
+              <label class="form-label" for="analysis-to-date">Đến ngày</label>
+              <input id="analysis-to-date" type="date" class="form-control" />
+            </div>
+            <div class="form-group" style="flex:1;min-width:160px;margin-bottom:0;">
+              <label class="form-label" for="analysis-category-value">Giá trị danh mục</label>
+              <input id="analysis-category-value" type="search" class="form-control" placeholder="Để trống để xem tất cả" />
+            </div>
+            <div class="form-group" style="min-width:150px;margin-bottom:0;">
+              <label class="form-label" for="analysis-chart-type">Kiểu biểu đồ</label>
+              <select id="analysis-chart-type" class="form-control">
+                <option value="bar">Cột</option><option value="line">Xu hướng</option>
+                <option value="doughnut">Tỷ trọng</option><option value="pareto">Pareto ABC</option>
+                <option value="histogram">Histogram</option>
+              </select>
+            </div>
+            <button id="btn-reanalyze" class="btn btn-secondary btn-md">
+              Tính toán lại
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 KPI Stat Cards -->
+        <div class="kpi-grid" style="margin-bottom:24px;">
+          <div class="stat-card">
+            <div class="stat-card-top">
+              <div class="stat-card-icon indigo">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+            <div class="stat-card-label">TỔNG GIÁ TRỊ (TỔNG CỘNG)</div>
+            <div class="stat-card-value" id="kpi-sum" style="color:var(--indigo-600);">0</div>
+            <div class="stat-card-change" style="color:var(--slate-500);font-size:12px;">Quy mô toàn bộ <span class="kpi-metric-name">chỉ số</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-top">
+              <div class="stat-card-icon emerald">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+              </div>
+            </div>
+            <div class="stat-card-label">GIÁ TRỊ TRUNG BÌNH</div>
+            <div class="stat-card-value" id="kpi-mean" style="color:var(--emerald-600);">0</div>
+            <div class="stat-card-change" style="color:var(--slate-500);font-size:12px;">Mức bình quân mỗi bản ghi</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-top">
+              <div class="stat-card-icon indigo">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+            <div class="stat-card-label">GIÁ TRỊ TRUNG VỊ</div>
+            <div class="stat-card-value" id="kpi-median" style="color:var(--indigo-600);">0</div>
+            <div class="stat-card-change" style="color:var(--slate-500);font-size:12px;">Điểm chia đôi phân phối mẫu</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-top">
+              <div class="stat-card-icon amber">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+            <div class="stat-card-label">ĐỘ LỆCH CHUẨN (BIẾN THIÊN)</div>
+            <div class="stat-card-value" id="kpi-std" style="color:var(--amber-500);">0</div>
+            <div class="stat-card-change" style="color:var(--slate-500);font-size:12px;">Mức độ phân tán của dữ liệu</div>
+          </div>
+        </div>
+
+        <section class="card" style="margin-bottom:24px;">
+          <div class="card-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+              <div>
+                <h3 style="font-size:15px;font-weight:650;color:var(--navy-800);">Kiểm tra chất lượng dữ liệu</h3>
+                <p class="text-muted text-sm" style="margin-top:4px;">Phát hiện ô trống, dòng trùng và mức độ đầy đủ của bảng.</p>
+              </div>
+              <button id="btn-quality-audit" class="btn btn-secondary btn-md">Kiểm tra chất lượng</button>
+            </div>
+            <div id="quality-audit-results" aria-live="polite" style="margin-top:16px;"></div>
+          </div>
+        </section>
+
+        <!-- Charts Grid 2×2 -->
+        <div class="chart-grid-2x2" style="margin-bottom:24px;">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div class="chart-card-title">1. Biểu đồ Cột – So sánh theo danh mục</div>
+            </div>
+            <div class="chart-card-body">
+              <canvas id="chart-bar"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div class="chart-card-title">2. Biểu đồ Đường – Xu hướng biến động</div>
+            </div>
+            <div class="chart-card-body">
+              <canvas id="chart-line"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div class="chart-card-title">3. Biểu đồ Tròn – Cơ cấu tỷ trọng (%)</div>
+            </div>
+            <div class="chart-card-body">
+              <canvas id="chart-doughnut"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div class="chart-card-title">4. Biểu đồ Pareto / Phân loại ABC (80/20)</div>
+            </div>
+            <div class="chart-card-body">
+              <canvas id="chart-pareto"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full-width Histogram -->
+        <div class="chart-card" style="margin-bottom:24px;">
+          <div class="chart-card-header">
+            <div class="chart-card-title">5. Biểu đồ Histogram – Phân phối tần suất dữ liệu</div>
+          </div>
+          <div class="chart-card-body tall">
+            <canvas id="chart-histogram"></canvas>
+          </div>
+        </div>
+
+        <!-- Gemini AI Insights & Recommendations -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <h4 class="card-title" style="font-size:14px;font-weight:600;color:var(--navy-800);">Nhận định Chuyên sâu</h4>
+                  <span id="gemini-badge-source" class="badge badge-slate" style="font-size:10.5px;">Chưa phân tích</span>
+                </div>
+                <p style="font-size:12.5px;color:var(--slate-500);margin-top:2px;">Google Gemini Flash (Mô hình AI mới nhất) sinh nhận định kinh doanh dựa trên số liệu thực</p>
+              </div>
+              <div style="display:flex;gap:6px;">
+                <button id="btn-config-gemini-inline" class="btn btn-secondary btn-sm" title="Cấu hình Google Gemini API Key">🔑 Nhập API Key</button>
+                <button id="btn-refresh-gemini" class="btn btn-secondary btn-sm">Làm mới</button>
+              </div>
+            </div>
+            <div class="card-body" style="padding-top:0;">
+              <label class="form-label" for="analysis-ai-question">Hỏi về dữ liệu bằng tiếng Việt</label>
+              <div style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;">
+                <textarea id="analysis-ai-question" class="form-control" maxlength="500" rows="2" style="flex:1;min-width:220px;" placeholder="Ví dụ: Kênh bán nào đóng góp doanh thu nhiều nhất? Vì sao?"></textarea>
+                <button id="btn-ask-data" class="btn btn-primary btn-sm" type="button">Hỏi AI</button>
+              </div>
+              <div class="text-muted text-xs" style="margin-top:6px;">Cần có API Key Gemini để trả lời câu hỏi theo ngữ cảnh doanh nghiệp.</div>
+            </div>
+            <div id="gemini-insights-container" style="padding:0 24px 24px;">
+              <div class="text-muted text-sm" style="padding:16px 0;">Đang tải nhận định...</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h4 class="card-title" style="font-size:14px;font-weight:600;color:var(--navy-800);">Đề xuất Hành động Điều hành</h4>
+                <p style="font-size:12.5px;color:var(--slate-500);margin-top:2px;">Khuyến nghị chiến lược theo thứ tự ưu tiên</p>
+              </div>
+            </div>
+            <div id="gemini-recommendations-container" style="padding:0 24px 24px;">
+              <div class="text-muted text-sm" style="padding:16px 0;">Đang tải khuyến nghị...</div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /view-analyze -->
+
+      <!-- ============================================================
+           VIEW: EXPORT (Bước 4)
+           ============================================================ -->
+      <div id="view-export" class="view">
+
+        <div style="margin-bottom:24px;">
+          <h2 class="page-title">Bước 4 – Xuất tệp dữ liệu sạch &amp; Báo cáo</h2>
+          <p class="page-subtitle">Tải xuống bộ dữ liệu đã làm sạch và báo cáo tổng hợp với nhiều định dạng chuẩn doanh nghiệp.</p>
+          <p class="workflow-hint"><strong>Hoàn tất:</strong> Chọn định dạng phù hợp. Báo cáo sẽ ghi rõ thời điểm tạo và các thiết lập phân tích.</p>
+        </div>
+
+        <!-- Export Summary -->
+        <div class="card" style="margin-bottom:24px;">
+          <div class="card-body">
+            <h3 style="font-size:14px;font-weight:600;color:var(--navy-800);margin-bottom:12px;">Tổng kết tệp dữ liệu xuất</h3>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+              <div>
+                <div style="font-size:11px;font-weight:600;color:var(--slate-500);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Tên tệp gốc</div>
+                <div id="export-summary-filename" style="font-size:14px;font-weight:600;color:var(--navy-800);">Chưa có</div>
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;color:var(--slate-500);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Số dòng hợp lệ</div>
+                <div id="export-summary-rows" style="font-size:14px;font-weight:600;color:var(--emerald-600);">0</div>
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;color:var(--slate-500);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Số cột phân tích</div>
+                <div id="export-summary-cols" style="font-size:14px;font-weight:600;color:var(--navy-800);">0</div>
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:600;color:var(--slate-500);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Chỉ số chính</div>
+                <div id="export-summary-metric" style="font-size:14px;font-weight:600;color:var(--indigo-600);">Chưa chọn</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Export Cards -->
+        <div class="export-grid">
+          <div class="export-card">
+            <div class="export-card-icon" style="background:var(--emerald-100);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--emerald-600)" stroke-width="1.75">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+              </svg>
+            </div>
+            <div class="export-card-label">Excel chuẩn (.xlsx)</div>
+            <div class="export-card-desc">Gồm Sheet dữ liệu sạch đã định dạng và Sheet nhật ký kiểm toán.</div>
+            <button class="btn btn-primary btn-md" style="width:100%;margin-top:auto;" data-export-format="excel">Tải xuống Excel (.xlsx)</button>
+          </div>
+
+          <div class="export-card">
+            <div class="export-card-icon" style="background:var(--indigo-100);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--indigo-600)" stroke-width="1.75">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
+            <div class="export-card-label">CSV Chuẩn UTF-8 (.csv)</div>
+            <div class="export-card-desc">Tương thích hoàn hảo với PowerBI, Tableau, Python Pandas và R.</div>
+            <button class="btn btn-secondary btn-md" style="width:100%;margin-top:auto;" data-export-format="csv">Tải xuống CSV (.csv)</button>
+          </div>
+
+          <div class="export-card">
+            <div class="export-card-icon" style="background:var(--amber-100);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--amber-500)" stroke-width="1.75">
+                <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <div class="export-card-label">Dashboard Offline (.html)</div>
+            <div class="export-card-desc">Trang báo cáo HTML độc lập, mở offline mọi nơi không cần máy chủ.</div>
+            <button class="btn btn-secondary btn-md" style="width:100%;margin-top:auto;" data-export-format="html">Tải xuống Báo cáo HTML</button>
+          </div>
+
+          <div class="export-card">
+            <div class="export-card-icon" style="background:var(--slate-100);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--slate-500)" stroke-width="1.75">
+                <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <div class="export-card-label">Dữ liệu JSON (.json)</div>
+            <div class="export-card-desc">Mảng đối tượng JSON đã chuẩn hóa để tích hợp hệ thống qua API.</div>
+            <button class="btn btn-secondary btn-md" style="width:100%;margin-top:auto;" data-export-format="json">Tải xuống JSON (.json)</button>
+          </div>
+          <div class="export-card">
+            <div class="export-card-icon" style="background:var(--red-100);color:var(--red-500);">PDF</div>
+            <div class="export-card-label">Lưu báo cáo PDF</div>
+            <div class="export-card-desc">Mở bản in đã định dạng; chọn “Lưu dưới dạng PDF” trong hộp thoại in.</div>
+            <button class="btn btn-secondary btn-md" style="width:100%;margin-top:auto;" data-export-format="pdf">Mở bản in PDF</button>
+          </div>
+        </div>
+      </div><!-- /view-export -->
+
+      <!-- ============================================================
+           VIEW: HISTORY
+           ============================================================ -->
+      <div id="view-history" class="view">
+
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:16px;">
+          <div>
+            <h2 class="page-title">Lịch sử tệp trong Cơ sở dữ liệu H2</h2>
+            <p class="page-subtitle">Danh sách các tệp dữ liệu đã nạp và lưu trữ trong bảng <code>DATASETS</code> của cơ sở dữ liệu.</p>
+          </div>
+          <button id="btn-refresh-history" class="btn btn-secondary btn-md" style="flex-shrink:0;">
+            Làm mới danh sách
+          </button>
+        </div>
+
+        <div class="card">
+          <div style="overflow-x:auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width:50px;" class="text-center">#</th>
+                  <th>Tên tệp</th>
+                  <th>Thời gian tải</th>
+                  <th class="text-right">Số dòng</th>
+                  <th class="text-right">Số cột</th>
+                  <th>Trạng thái</th>
+                  <th class="text-center" style="width:140px;">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="history-table-body">
+                <tr><td colspan="7" class="text-center text-muted" style="padding:32px;">Đang tải danh sách...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><!-- /view-history -->
+
+    </div><!-- /page-content -->
+  </main>
+
+  <!-- ── Modal Cấu hình Gemini API Key ──────────────────────────────── -->
+  <div id="gemini-key-modal" class="modal-overlay">
+    <div class="modal" style="max-width:500px;width:90%;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:18px;">🔑</span>
+          <span class="modal-title">Cấu hình Google Gemini API Key</span>
+        </div>
+        <button id="btn-close-gemini-modal" class="btn btn-ghost btn-sm" style="padding:4px 8px;font-size:16px;">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:13px;color:var(--slate-500);margin-bottom:16px;line-height:1.6;">
+          Dán khóa <strong>Google Gemini API Key</strong> để kích hoạt mô hình thế hệ mới nhất <strong>Google Gemini Flash (3.1 / Flash-Lite)</strong> sinh nhận định quản trị và khuyến nghị hành động thực tế.
+        </p>
+        <div class="form-group">
+          <label class="form-label">Gemini API Key (Bắt đầu bằng <code>AIzaSy...</code> hoặc <code>AQ....</code>):</label>
+          <div style="position:relative;">
+            <input id="input-gemini-key" type="password" placeholder="Dán khóa API của bạn vào đây..." class="form-control" autocomplete="off" style="padding-right:75px;" />
+            <button id="btn-toggle-key-visibility" type="button" class="btn btn-ghost btn-sm" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);padding:2px 8px;font-size:11px;">Hiện</button>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;font-size:12px;color:var(--slate-500);">
+          <span>Khóa lưu an toàn trong trình duyệt (localStorage)</span>
+          <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--indigo-600);font-weight:600;text-decoration:none;">Lấy Key miễn phí tại Google AI Studio ↗</a>
+        </div>
+        <div id="gemini-modal-status" style="margin-top:14px;padding:10px 14px;border-radius:6px;font-size:12.5px;display:none;line-height:1.5;"></div>
+      </div>
+      <div class="modal-footer" style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">
+        <button id="btn-clear-gemini-key" class="btn btn-danger btn-sm">Xóa khóa</button>
+        <div style="display:flex;gap:8px;">
+          <button id="btn-test-gemini-key" class="btn btn-secondary btn-sm" title="Kiểm tra kết nối trực tiếp với Google Gemini API">⚡ Kiểm tra kết nối</button>
+          <button id="btn-cancel-gemini-modal" class="btn btn-secondary btn-sm">Đóng</button>
+          <button id="btn-save-gemini-key" class="btn btn-primary btn-sm">Lưu &amp; Kích hoạt</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Application Script (ES Module) -->
+  <script type="module" src="./js/app.js"></script>
+
+</body>
+</html>
